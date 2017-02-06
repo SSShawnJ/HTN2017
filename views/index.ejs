@@ -303,6 +303,19 @@ function readAvailabelGuide(){
                text=landmark.name;
              }
 
+
+             $.ajax({
+                url: '/geturl', 
+                dataType: 'json', 
+                contentType: 'application/json', 
+                data: JSON.stringify({landmark:landmark.name}),
+
+                success: function(response){
+                    console.log(response);
+
+                }
+            });
+
             content[landmark.name]=text;
              responsiveVoice.speak(text, "UK English Male",{rate:0.8});
             }else{

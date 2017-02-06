@@ -21,7 +21,11 @@ app.get('/',function(req,res){
 });
 
 app.post('/geturl', function(req, res){
+	console.log(req.body.landmark);
 
+
+	reswriteHead(200, {"Content-Type": "application/json"});
+	res.end(JSON.stringify({hhh:'hhhhhh'}));
 
 });
 
