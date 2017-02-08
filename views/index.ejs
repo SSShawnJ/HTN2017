@@ -61,11 +61,7 @@
 
 
 <script>
-  // This example adds a marker to indicate the position of Bondi Beach in Sydney,
-  // Australia.
-      // This example adds a marker to indicate the position of Bondi Beach in Sydney,
-      // Australia.
-
+      //current position
       var pos={lat: 37.769900000000014, lng: -122.45740000000015};
       var request = {
             location: pos,
@@ -289,32 +285,27 @@ function readAvailabelGuide(){
       var landmark=queue.shift();
       var text;
 
-      var WikiUrl='https://en.wikipedia.org/w/api.php?action=opensearch&search='+landmark.name+'&format=json&callback=wikiCallback';
+      var WikiUrl='https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&callback=wikiCallback&redirects&titles='+landmark.name;
 
       $.ajax({
         url:WikiUrl,
         dataType: 'jsonp',
         //jsonp: "callback"
         success: function(response){
+            console.log(response);
+
             if( !( typeof response === "undefined")){
-                text=response[2][0];
+                var k= Object.keys(response.query.pages);
+                text=response.query.pages[k[0]].extract;
             console.log(text);
              if( ( typeof text === "undefined") || text==''){
                text=landmark.name;
              }
-
-
-             $.ajax({
-                url: '/geturl', 
-                dataType: 'json', 
-                contentType: 'application/json', 
-                data: JSON.stringify({landmark:landmark.name}),
-
-                success: function(response){
-                    console.log(response);
-
-                }
-            });
+            //Get mothed
+            // var parameters={url:response[3][0]};
+            // $.get('/geturl',parameters,function(data){
+            //   text=data;
+            // });
 
             content[landmark.name]=text;
              responsiveVoice.speak(text, "UK English Male",{rate:0.8});
@@ -325,11 +316,8 @@ function readAvailabelGuide(){
             
         }
 
-    });
+       });
 
-
-      //console.log(landmark.name);
-     
     }
 
   },2000);

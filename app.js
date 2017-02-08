@@ -1,7 +1,5 @@
 var express = require('express');
 var bodyParser =require('body-parser');
-// var request = require('request');
-// var cheerio = require('cheerio');
 
 
 var app = express();
@@ -20,23 +18,11 @@ app.get('/',function(req,res){
 
 });
 
-app.post('/geturl', function(req, res){
-	console.log(req.body.landmark);
+// app.get('/geturl', function(req, res){
+// 	var val=req.query.url;
+// 	console.log(val);
 
-
-	reswriteHead(200, {"Content-Type": "application/json"});
-	res.end(JSON.stringify({hhh:'hhhhhh'}));
-
-});
-
-// var http=require('http');
-// var fs= require('fs');
-
-// var server= http.createServer(function(req,res){
-// 	res.writeHead(200,{'Content-Type' : 'text/html'});
-
-// 	var myReadStream=fs.createReadStream(__dirname+'/TourGuide.html','utf8');
-// 	myReadStream.pipe(res); 
+// 	res.send(val);
 
 // });
 
